@@ -1,0 +1,48 @@
+export const plans = [
+    {
+        title: "Basic Plan",
+        description: "Ideal for individuals or startups looking to automate simple call workflows with essential features.",
+        price: 0.2,
+        features: [
+            "✅ 3 free call minutes per month",
+            "✅ Basic call analytics",
+            "✅ Add 2 company and 3 user",
+            "✅ HubSpot integration",
+            "✅ Custom number at $2 /month",
+            "❌ AI transcript generation",
+            "❌ Team management",
+            "❌ Calendy integration",
+        ],
+    },
+    {
+        title: "Pro Plan",
+        description: "Perfect for small businesses scaling customer engagement with advanced features.",
+        price: 0.23,
+        features: [
+            "✅ 5 free call minutes per month",
+            "✅ Advanced analytics",
+            "✅ Add up to 4 companies & users",
+            "✅ Customizable call transcripts",
+            "✅ AI transcript generation",
+            "✅ HubSpot integration",
+            "✅ Custom number at $2 /month",
+            "❌ Calendy integration",
+            "❌ Advanced team management",
+        ],
+    },
+    {
+        title: "Enterprise Plan",
+        description: "Designed for enterprises needing high-volume call automation, AI-driven workflows, and premium support.",
+        price: 0.25,
+        features: [
+            "✅ 8 free call minutes per month",
+            "✅ Premium analytics with insights",
+            "✅ Unlimited companies and users",
+            "✅ AI-driven custom workflows",
+            "✅ Fully customizable transcripts",
+            "✅ Dedicated account manager",
+            "✅ Custom number at $2 /month",
+            "✅ Calendy integration",
+        ],
+    },
+];
