@@ -66,13 +66,13 @@ const Profile = () => {
                 </div>
 
                 <div className='mt-6 border-b pb-2'>
-                    <p>Nom d'utilisateur : {data?.username}</p>
+                    <p>Username : {data?.username}</p>
                 </div>
                 <div className='mt-2 border-b pb-2'>
                     <p>Email : {data?.email}</p>
                 </div>
                 <div className='mt-2 border-b pb-2'>
-                    <p>Rôle : {data?.role}</p>
+                    <p>Role : Admin</p>
                 </div>
 
             </div>
