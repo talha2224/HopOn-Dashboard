@@ -2,35 +2,32 @@ import axios from 'axios';
 import React from 'react'
 import toast from 'react-hot-toast';
 import config from '../../../config';
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
 
-const CreateContactPopup = ({ contactInfo, setContactInfo, closeModel, parentId }) => {
+const CreateContactPopup = ({ contactInfo, setPriceData, closeModel }) => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setContactInfo(prevState => ({ ...prevState, [name]: value }));
+        setPriceData(prevState => ({ ...prevState, [name]: value }));
     };
 
     const handleSubmit = async () => {
         let loader = toast.loading("Processing Request....")
-        if (contactInfo?.name?.length === "") {
+        if (!contactInfo?.perKmPrice || !contactInfo?.deductCharges) {
             toast.dismiss(loader)
             toast.error("Please fill all the fields")
             return
         }
         else {
             try {
-                let res = await axios.post(`${config.baseUrl}/category/create`, { ...contactInfo })
+                let res = await axios.post(`${config.baseUrl}/price/update`, { ...contactInfo })
                 if (res.data) {
                     toast.dismiss(loader)
-                    toast.success("Category Created")
-                    setContactInfo({ contactId: "",name: ""})
+                    toast.success("Price Updated")
                     closeModel(false)
                 }
             }
             catch (error) {
                 toast.dismiss(loader)
-                toast.error(error.response?.data?.msg ? error.response?.data?.msg : "Failed to create category")
+                toast.error(error.response?.data?.msg ? error.response?.data?.msg : "Failed to update price")
             }
         }
     };
@@ -41,8 +38,12 @@ const CreateContactPopup = ({ contactInfo, setContactInfo, closeModel, parentId 
                 <h2 className="text-lg font-medium mb-4">Create New Category</h2>
 
                 <div className="mb-4">
-                    <label htmlFor="companyName" className="text-sm mb-2 block">Category Name</label>
-                    <input type="text" id="companyName" name="name" value={contactInfo.name} onChange={handleInputChange} placeholder="Category Name" className="w-full px-3 py-2 border rounded-md focus:outline-none text-sm" />
+                    <label htmlFor="perKmPrice" className="text-sm mb-2 block">Per Km Price</label>
+                    <input type="number" id="perKmPrice" name="perKmPrice" value={contactInfo?.perKmPrice} onChange={(e)=>handleInputChange(e)} placeholder="Per Km Price" className="w-full px-3 py-2 border rounded-md focus:outline-none text-sm" />
+
+                    <label htmlFor="deductCharges" className="text-sm my-2 block">Per Ride Fees %</label>
+                    <input type="number" id="deductCharges" name="deductCharges" value={contactInfo?.deductCharges} onChange={(e)=>handleInputChange(e)} placeholder="Per Km Price" className="w-full px-3 py-2 border rounded-md focus:outline-none text-sm" />
+
                 </div>
 
 
@@ -50,7 +51,7 @@ const CreateContactPopup = ({ contactInfo, setContactInfo, closeModel, parentId 
                 {/* Buttons */}
                 <div className="mt-4 flex justify-end">
                     <button className="px-4 py-2 bg-gray-300 rounded-md mr-2 text-sm" onClick={() => closeModel(false)}>Cancel</button>
-                    <button className="px-4 py-2 bg-[#FF6600] text-white rounded-md text-sm" onClick={handleSubmit}>Submit</button>
+                    <button className="px-4 py-2 bg-[#FF6600] text-white rounded-md text-sm" onClick={handleSubmit}>Save</button>
                 </div>
             </div>
         </div>

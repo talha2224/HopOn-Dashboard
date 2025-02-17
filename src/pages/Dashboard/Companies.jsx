@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { formatReadableDate } from "../../helpers/function";
 import Pagination from "../../components/dashboard/Pagination";
 import { GoogleMap, Marker, Polyline } from "@react-google-maps/api";
+import CreateContactPopup from "../../components/dashboard/popups/CreateContactPopup";
 
 
 const containerStyle = {
@@ -15,9 +16,11 @@ const containerStyle = {
 
 const Companies = () => {
     const [bookingData, setBookingData] = useState([]);
+    const [priceData, setPriceData] = useState({});
     const [paginatedData, setPaginatedData] = useState([]);
     const [booking, setBooking] = useState(null);
     const [showBookingMap, setShowBookingMap] = useState(false);
+    const [priceModel, setPriceModel] = useState(false)
 
     const handleDataChange = (data) => {
         setPaginatedData(data);
@@ -26,6 +29,8 @@ const Companies = () => {
     const fetchInitialData = async () => {
         try {
             let res = await axios.get(`${config.baseUrl}/ride/all`);
+            let res2 = await axios.get(`${config.baseUrl}/price/all`);
+            setPriceData(res2?.data?.data[0])
             setBookingData(res.data?.data);
         } catch (error) {
             toast.error("Failed To Fetch companies");
@@ -36,16 +41,16 @@ const Companies = () => {
         fetchInitialData();
     }, []);
 
-    console.log(booking)
-
+    console.log(priceData, 'priceData')
     return (
 
         <div>
             {/* HEADER */}
-            <div className="flex justify-start md:justify-end items-center gap-x-4 flex-wrap">
-                <div className="bg-[#fff] border rounded-md py-2 px-3 flex items-center justify-between w-fit sm:w-[16rem] mt-2">
-                    <input
-                        type="text"
+            <div className="flex justify-start md:justify-end items-center gap-x-4 flex-wrap mt-2">
+                <button onClick={() => { setPriceModel(true) }} className={`text-xs text-white px-2 rounded-[0.3rem] text-nowrap h-[2rem] bg-[#4285F4]`}>Update Pricing</button>
+
+                <div className="bg-[#fff] border rounded-md py-2 px-3 flex items-center justify-between w-fit sm:w-[16rem]">
+                    <inputv type="text"
                         placeholder="Search"
                         className="w-[100%] sm:w-[12rem] rounded-md mr-3 outline-none border-none bg-transparent"
                     />
@@ -152,6 +157,10 @@ const Companies = () => {
                     </div>
                 </div>
             )}
+
+            {
+                priceModel && (<CreateContactPopup contactInfo={priceData} setPriceData={setPriceData} closeModel={setPriceModel} />)
+            }
         </div>
     );
 };
