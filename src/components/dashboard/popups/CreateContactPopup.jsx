@@ -42,7 +42,7 @@ const CreateContactPopup = ({ contactInfo, setPriceData, closeModel }) => {
                     <input type="number" id="perKmPrice" name="perKmPrice" value={contactInfo?.perKmPrice} onChange={(e)=>handleInputChange(e)} placeholder="Per Miles Price" className="w-full px-3 py-2 border rounded-md focus:outline-none text-sm" />
 
                     <label htmlFor="perKmPrice" className="text-sm my-2 block mt-4">Per KM Price</label>
-                    <input type="number" id="perKmPrice" name="perKmPrice" value={contactInfo?.perMilePrice} onChange={(e)=>handleInputChange(e)} placeholder="Per KM Price" className="w-full px-3 py-2 border rounded-md focus:outline-none text-sm" />
+                    <input type="number" id="perKmPrice" name="perMilePrice" value={contactInfo?.perMilePrice} onChange={(e)=>handleInputChange(e)} placeholder="Per KM Price" className="w-full px-3 py-2 border rounded-md focus:outline-none text-sm" />
 
 
                     <label htmlFor="deductCharges" className="text-sm my-2 block">Per Ride Fees %</label>
