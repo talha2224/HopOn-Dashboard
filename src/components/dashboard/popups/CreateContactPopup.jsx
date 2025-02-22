@@ -35,11 +35,15 @@ const CreateContactPopup = ({ contactInfo, setPriceData, closeModel }) => {
     return (
         <div className="fixed top-0 left-0 w-screen h-screen inset-0 bg-black bg-opacity-50 flex justify-center items-center transition-opacity duration-300 ease-in-out" onClick={() => closeModel(false)}>
             <div className="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-md transform scale-95 opacity-0 animate-fade-in" onClick={(e) => e.stopPropagation()}>
-                <h2 className="text-lg font-medium mb-4">Create New Category</h2>
+                <h2 className="text-lg font-medium mb-4">Update Pricing</h2>
 
                 <div className="mb-4">
                     <label htmlFor="perKmPrice" className="text-sm mb-2 block">Per Miles Price</label>
                     <input type="number" id="perKmPrice" name="perKmPrice" value={contactInfo?.perKmPrice} onChange={(e)=>handleInputChange(e)} placeholder="Per Miles Price" className="w-full px-3 py-2 border rounded-md focus:outline-none text-sm" />
+
+                    <label htmlFor="perKmPrice" className="text-sm my-2 block mt-4">Per KM Price</label>
+                    <input type="number" id="perKmPrice" name="perKmPrice" value={contactInfo?.perMilePrice} onChange={(e)=>handleInputChange(e)} placeholder="Per KM Price" className="w-full px-3 py-2 border rounded-md focus:outline-none text-sm" />
+
 
                     <label htmlFor="deductCharges" className="text-sm my-2 block">Per Ride Fees %</label>
                     <input type="number" id="deductCharges" name="deductCharges" value={contactInfo?.deductCharges} onChange={(e)=>handleInputChange(e)} placeholder="Per Miles Fees %" className="w-full px-3 py-2 border rounded-md focus:outline-none text-sm" />
