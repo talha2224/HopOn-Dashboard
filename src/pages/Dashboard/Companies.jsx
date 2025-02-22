@@ -40,8 +40,6 @@ const Companies = () => {
     useEffect(() => {
         fetchInitialData();
     }, []);
-
-    console.log(priceData, 'priceData')
     return (
 
         <div>
